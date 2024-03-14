@@ -1,4 +1,17 @@
+# VS Code
 app.dSYM/*
 x64/*
 app*
+
+# MacOS
 .DS_Store
+
+# VS 2022
+.vs/*
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# General
+.gitignore
+.git
