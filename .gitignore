@@ -9,6 +9,7 @@ app*
 # VS 2022
 .vs/*
 *.vcxproj.user
+Debug/*
 
 # General
 .gitignore
