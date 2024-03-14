@@ -4,7 +4,7 @@
 
 // MAIN MENU
 int main() {
-
+	
 	//create scenes
 	lighthouse lighthouse;
 	cinemagraph cinemagraph;

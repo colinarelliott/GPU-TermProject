@@ -124,6 +124,7 @@
   <ItemGroup>
     <ClCompile Include="cinemagraph.cpp" />
     <ClCompile Include="dependencies\include\glm\detail\glm.cpp" />
+    <ClCompile Include="dependencies\include\model.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="lighthouse.cpp" />
     <ClCompile Include="main.cpp" />
@@ -278,7 +279,7 @@
     <ClInclude Include="dependencies\include\glm\vec4.hpp" />
     <ClInclude Include="dependencies\include\glm\vector_relational.hpp" />
     <ClInclude Include="dependencies\include\khr\khrplatform.h" />
-    <ClInclude Include="Debug\model.h" />
+    <ClInclude Include="dependencies\include\model.h" />
     <ClInclude Include="dependencies\include\shader_m.h" />
     <ClInclude Include="dependencies\include\stb_image.h" />
     <ClInclude Include="lighthouse.h" />
