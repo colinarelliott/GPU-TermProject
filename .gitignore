@@ -8,8 +8,6 @@ app*
 
 # VS 2022
 .vs/*
-*.vcxproj
-*.vcxproj.filters
 *.vcxproj.user
 
 # General
