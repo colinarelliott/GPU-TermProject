@@ -122,11 +122,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cinemagraph.cpp" />
     <ClCompile Include="dependencies\include\glm\detail\glm.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="lighthouse.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cinemagraph.h" />
     <ClInclude Include="dependencies\include\glad\glad.h" />
     <ClInclude Include="dependencies\include\glfw\glfw3.h" />
     <ClInclude Include="dependencies\include\glfw\glfw3native.h" />
@@ -275,8 +278,11 @@
     <ClInclude Include="dependencies\include\glm\vec4.hpp" />
     <ClInclude Include="dependencies\include\glm\vector_relational.hpp" />
     <ClInclude Include="dependencies\include\khr\khrplatform.h" />
+    <ClInclude Include="Debug\model.h" />
     <ClInclude Include="dependencies\include\shader_m.h" />
     <ClInclude Include="dependencies\include\stb_image.h" />
+    <ClInclude Include="lighthouse.h" />
+    <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dependencies\include\glm\detail\func_common.inl" />
