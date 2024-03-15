@@ -2,15 +2,18 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "main.h"
 
-// MAIN MENU
+// Choose between scenes
 int main() {
 	
 	//create scenes
 	lighthouse lighthouse;
 	cinemagraph cinemagraph;
 
+	//menu toggle and choice
 	bool menu = true;
 	int choice;
+
+	//main menu
 	while (menu) {
 		std::cout << "Welcome to the Colin's GPU Programming Term Project!" << std::endl;
 		std::cout << "Please select a scene to render:" << std::endl;
