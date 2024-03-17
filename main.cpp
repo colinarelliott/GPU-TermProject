@@ -15,6 +15,7 @@ int main() {
 
 	//main menu
 	while (menu) {
+		system("CLS");
 		std::cout << "Welcome to the Colin's GPU Programming Term Project!" << std::endl;
 		std::cout << "Please select a scene to render:" << std::endl;
 		std::cout << "1. Lighthouse (3D Scene)" << std::endl;
