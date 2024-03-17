@@ -9,4 +9,4 @@
 - Open `main.cpp` and Run it
 
 ### Created using the [Modern OpenGL Tutorial](https://learnopengl.com/)
-- Libraries included: GLFW, GLAD, GLM, STB_IMAGE, ASSIMP, KHR
+- Libraries included: GLFW, GLAD, GLM, STB_IMAGE, ASSIMP, KHR, FREETYPE
