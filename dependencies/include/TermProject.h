@@ -21,6 +21,10 @@
 // STB Image
 #include "stb_image.h"
 
+//Text
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 // GLM
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
