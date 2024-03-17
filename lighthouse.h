@@ -16,6 +16,4 @@ class lighthouse {
 		void processInput(GLFWwindow* window);
 		GLuint loadTexture(const char* path);
 		void setupVertexPointers();
-		void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-		void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 };
