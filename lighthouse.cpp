@@ -112,6 +112,7 @@ void lighthouse::drawLighthouse() {
 
 	Model backpackModel("models/backpack/backpack.obj");
 	Model testModel("models/test/test_concrete.obj");
+	Model lighthouseModel("models/lighthouse/lowPoly_lighthouse.obj");
 
 	shader.use();
 
@@ -133,7 +134,7 @@ void lighthouse::drawLighthouse() {
 
 		// render
 		// ------
-		glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+		glClearColor(0.05f, 0.5f, 0.7f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// don't forget to enable shader before setting uniforms
@@ -147,11 +148,11 @@ void lighthouse::drawLighthouse() {
 
 		// render the loaded model
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.25f, 0.25f, 0.25f));
+		model = glm::translate(model, glm::vec3(0.0f, -0.3f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		model = glm::rotate(model, 1.0f*currentFrame, glm::vec3(0.0f, 1.0f, 0.0f));
 		shader.setMat4("model", model);
-		//backpackModel.Draw(shader);
-		testModel.Draw(shader);
+		lighthouseModel.Draw(shader);
 
 		//render light source
 		lightShader.use();
