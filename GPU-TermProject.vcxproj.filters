@@ -1399,4 +1399,15 @@
     <Library Include="dependencies\library\assimp.lib" />
     <Library Include="dependencies\library\freetype.lib" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\img\foreground.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\img\sun.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\img\moon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
