@@ -111,9 +111,10 @@ void lighthouse::drawLighthouse() {
 	Shader lightShader("shaders/lightingShader.vs", "shaders/lightingShader.fs");
 	Shader textShader("shaders/textShader.vs", "shaders/textShader.fs");
 
-	Model backpackModel("resources/models/backpack/backpack.obj");
-	Model testModel("resources/models/test/test_concrete.obj");
-	Model lighthouseModel("resources/models/lighthouse/lowPoly_lighthouse.obj");
+	Model lighthouseLow("resources/models/lighthouse/lighthouse_cyl.obj");
+	Model lighthouseMed("resources/models/lighthouse/lowPoly_lighthouse.obj");
+	Model lighthouseHigh("resources/models/lighthouse/highPoly_lighthouse.obj");
+
 
 	shader.use();
 	textShader.use();
@@ -157,12 +158,15 @@ void lighthouse::drawLighthouse() {
 		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
 		model = glm::rotate(model, 1.0f*currentFrame, glm::vec3(0.0f, 1.0f, 0.0f));
 		shader.setMat4("model", model);
-		lighthouseModel.Draw(shader);
-
-		//bind VAO
-		glBindVertexArray(VAO);
-		//draw light source
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		if (camera.Zoom < 15.0f) {
+			lighthouseHigh.Draw(shader);
+		}
+		else if (camera.Zoom > 15.0f && camera.Zoom < 30.0f) {
+			lighthouseMed.Draw(shader);
+		}
+		else if (camera.Zoom > 30.0f && camera.Zoom < 50.0f) {
+			lighthouseLow.Draw(shader);
+		}
 
 		textShader.use();
 		//Show text
