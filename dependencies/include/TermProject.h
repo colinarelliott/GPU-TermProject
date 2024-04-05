@@ -17,6 +17,9 @@
 #include <fstream>
 #include <sstream>
 #include <map>
+#include <list>
+#include <memory>
+#include <array> //std::array
 
 // STB Image
 #include "stb_image.h"
@@ -35,3 +38,4 @@
 #include <mesh.h>
 #include <model.h>
 #include <camera.h>
+#include <entity.h>

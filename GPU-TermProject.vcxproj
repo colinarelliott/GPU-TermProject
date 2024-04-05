@@ -215,6 +215,7 @@
     <ClInclude Include="dependencies\include\assimp\XMLTools.h" />
     <ClInclude Include="dependencies\include\assimp\ZipArchiveIOSystem.h" />
     <ClInclude Include="dependencies\include\camera.h" />
+    <ClInclude Include="dependencies\include\entity.h" />
     <ClInclude Include="dependencies\include\freetype\config\ftconfig.h" />
     <ClInclude Include="dependencies\include\freetype\config\ftheader.h" />
     <ClInclude Include="dependencies\include\freetype\config\ftmodule.h" />
