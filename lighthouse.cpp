@@ -159,12 +159,6 @@ void lighthouse::drawLighthouse() {
 		shader.setMat4("model", model);
 		lighthouseModel.Draw(shader);
 
-		//render light source
-		lightShader.use();
-		lightShader.setMat4("projection", projection);
-		lightShader.setMat4("view", view);
-		model = glm::translate(model, lightPos);
-
 		//bind VAO
 		glBindVertexArray(VAO);
 		//draw light source
