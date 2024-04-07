@@ -18,7 +18,7 @@ void lighthouse::drawLighthouse() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	//create the window
-	GLFWwindow* window = glfwCreateWindow(1280, 720, "Lighthouse LOD Demonstration", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1280, 720, "Lighthouse LOD Demonstration (Scroll Zoom to view LOD change)", NULL, NULL);
 
 	//if window not valid, terminate
 	if (window == NULL) {
@@ -158,10 +158,10 @@ void lighthouse::drawLighthouse() {
 		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
 		model = glm::rotate(model, 1.0f*currentFrame, glm::vec3(0.0f, 1.0f, 0.0f));
 		shader.setMat4("model", model);
-		if (camera.Zoom < 15.0f) {
+		if (camera.Zoom < 10.0f) {
 			lighthouseHigh.Draw(shader);
 		}
-		else if (camera.Zoom > 15.0f && camera.Zoom < 30.0f) {
+		else if (camera.Zoom >= 10.0f && camera.Zoom <= 30.0f) {
 			lighthouseMed.Draw(shader);
 		}
 		else if (camera.Zoom > 30.0f && camera.Zoom < 50.0f) {
