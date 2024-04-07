@@ -1409,5 +1409,11 @@
     <Image Include="resources\img\moon.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="resources\img\lighthouse.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\img\lighthouseBeam.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

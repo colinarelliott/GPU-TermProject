@@ -593,6 +593,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\img\foreground.png" />
+    <Image Include="resources\img\lighthouse.png" />
+    <Image Include="resources\img\lighthouseBeam.png" />
     <Image Include="resources\img\moon.png" />
     <Image Include="resources\img\sun.png" />
   </ItemGroup>

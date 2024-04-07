@@ -3,7 +3,6 @@
 
 cinemagraph::cinemagraph() {
 	//constructor
-
 }
 
 void cinemagraph::drawCinemagraph() {
@@ -50,7 +49,6 @@ void cinemagraph::drawCinemagraph() {
 
 	FreeTypeSetup();
 	
-
 	//setup vertex data and buffers and configure vertex attributes
 
 	unsigned int indices[] = {
@@ -60,29 +58,45 @@ void cinemagraph::drawCinemagraph() {
 
 	float foregroundVertices[] =  {
 		// positions          // colors           // texture coords
-		 1.0f,  1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-		 1.0f, -1.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-		-1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-		-1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+		 1.0f,  1.0f, 0.1f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 1.0f, -1.0f, 0.1f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		-1.0f, -1.0f, 0.1f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		-1.0f,  1.0f, 0.1f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
 	};
 
 	float sunVertices[] = {
-		// positions          // colors           //texture coords
-		0.2f,  0.2f, -0.1f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-		 0.2f, -0.2f, -0.1f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-		-0.2f, -0.2f, -0.1f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-		-0.2f,  0.2f, -0.1f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
+		// positions		   // colors           //texture coords
+		 -1.36f,  0.2f + 0.5f, -0.1f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 -1.36f, -0.2f + 0.5f, -0.1f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		-1.48f, -0.2f + 0.5f, -0.1f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		-1.48f,  0.2f + 0.5f, -0.1f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
 	};
 
 	float moonVertices[] = {
 		// positions          // colors           //texture coords
-		0.2f,  0.2f, -0.2f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-		 0.2f, -0.2f, -0.2f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-		-0.2f, -0.2f, -0.2f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-		-0.2f,  0.2f, -0.2f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
+		-1.36f,  0.2f, -0.2f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 -1.36f, -0.2f, -0.2f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		-1.48f, -0.2f, -0.2f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		-1.48f,  0.2f, -0.2f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
 	};
 
-	/*
+	float lighthouseVertices[] = {
+		// positions          // colors           // texture coords
+		 0.5f,  0.6f, -0.1f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 0.5f, -0.4f, -0.1f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		 0.1f, -0.4f, -0.1f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		 0.1f,  0.6f, -0.1f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+	};
+
+	float lighthouseBeamVertices[] = {
+		// positions          // colors           // texture coords
+		 0.3f,  0.55f, -0.4f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 0.3f, 0.25f, -0.4f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		 -1.2f, 0.25f, -0.4f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		 -1.2f,  0.55f, -0.4f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+	};
+
+	
 	// configure VAO/VBO for text
 	glGenVertexArrays(1, &textVAO);
 	glGenBuffers(1, &textVBO);
@@ -91,7 +105,7 @@ void cinemagraph::drawCinemagraph() {
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
-	*/
+	
 
 	//configure VAO/VBO for cinemagraph foreground
 	unsigned int VBO, VAO, EBO;
@@ -124,9 +138,9 @@ void cinemagraph::drawCinemagraph() {
 	glGenBuffers(1, &sunEBO);
 	glBindVertexArray(sunVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, sunVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(sunVertices), sunVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(sunVertices), sunVertices, GL_DYNAMIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, sunEBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW);
 	
 	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
@@ -135,7 +149,7 @@ void cinemagraph::drawCinemagraph() {
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 	// texture coord attribute
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
 	//VAO, VBO, EBO for moon
@@ -145,8 +159,29 @@ void cinemagraph::drawCinemagraph() {
 	glGenBuffers(1, &moonEBO);
 	glBindVertexArray(moonVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, moonVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(moonVertices), moonVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(moonVertices), moonVertices, GL_DYNAMIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, moonEBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW);
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	// texture coord attribute
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+
+	//VAO, VBO, EBO for lighthouse
+	unsigned int lighthouseVBO, lighthouseVAO, lighthouseEBO;
+	glGenVertexArrays(1, &lighthouseVAO);
+	glGenBuffers(1, &lighthouseVBO);
+	glGenBuffers(1, &lighthouseEBO);
+	glBindVertexArray(lighthouseVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, lighthouseVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(lighthouseVertices), lighthouseVertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lighthouseEBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	// position attribute
@@ -156,7 +191,28 @@ void cinemagraph::drawCinemagraph() {
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 	// texture coord attribute
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+
+	//VAO, VBO, EBO for lighthouseBeam
+	unsigned int lighthouseBeamVAO, lighthouseBeamVBO, lighthouseBeamEBO;
+	glGenVertexArrays(1, &lighthouseBeamVAO);
+	glGenBuffers(1, &lighthouseBeamVBO);
+	glGenBuffers(1, &lighthouseBeamEBO);
+	glBindVertexArray(lighthouseBeamVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, lighthouseBeamVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(lighthouseBeamVertices), lighthouseBeamVertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lighthouseBeamEBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	// texture coord attribute
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
 	//load texture into shader
@@ -166,11 +222,20 @@ void cinemagraph::drawCinemagraph() {
 	//flip image on load
 	stbi_set_flip_vertically_on_load(true);
 	//load foreground image
+	//https://cat.pexels.com/photo/a-lighthouse-on-a-cape-6263774/
 	GLuint foregroundTexture = loadTexture("resources/img/foreground.png");
 	//load sun image
+	//https://www.timeanddate.com/astronomy/sun/about
 	GLuint sunTexture = loadTexture("resources/img/sun.png");
 	//load moon image
+	//https://www.pexels.com/photo/photo-of-full-moon-975012/
 	GLuint moonTexture = loadTexture("resources/img/moon.png");
+	//load lighthouse image
+	//https://www.istockphoto.com/photo/peggys-cove-lighthouse-gm160353394-22770308?searchscope=image%2Cfilm
+	GLuint lighthouseTexture = loadTexture("resources/img/lighthouse.png");
+	//load lighthouse beam image
+	//Homemade in Photoshop
+	GLuint lighthouseBeamTexture = loadTexture("resources/img/lighthouseBeam.png");
 	
 	//clear
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -180,12 +245,22 @@ void cinemagraph::drawCinemagraph() {
 	while (!glfwWindowShouldClose(window)) {
 		//MAIN LOOP
 		//get input
+
+		// per-frame time logic
+		// --------------------
+		currentFrame = static_cast<float>(glfwGetTime());
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+
+		offset = sin(glfwGetTime());
+		float sunOffset = offset * -1;
+
 		processInput(window);
 
 		//rendering commands here =============
 
 		//clear colour set & clear
-		glClearColor(0.0f, 0.6f, 0.9f, 1.0f);
+		glClearColor(0.0f, 0.6f*sunOffset, 0.9f*sunOffset, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		textShader.use();
@@ -208,7 +283,18 @@ void cinemagraph::drawCinemagraph() {
 		//bind sun texture
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, sunTexture);
+		//set uniform for texture
+		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
 		//draw sun
+		float sunVertices[] = {
+			// positions                             // colors           //texture coords
+			-0.28f,  0.2f + sunOffset * .8, -0.2f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+			 -0.28f, -0.2f + sunOffset * .8, -0.2f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+			-0.04f, -0.2f + sunOffset * .8, -0.2f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+			-0.04f,  0.2f + sunOffset * .8, -0.2f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
+		};
+		glBindBuffer(GL_ARRAY_BUFFER, sunVBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(sunVertices), sunVertices, GL_DYNAMIC_DRAW);
 		glBindVertexArray(sunVAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		
@@ -216,8 +302,39 @@ void cinemagraph::drawCinemagraph() {
 		//bind moon texture
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, moonTexture);
+		//set uniform for texture
+		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
 		//draw moon
+		float moonVertices[] = {
+			// positions                      // colors           //texture coords
+			-0.52f,  0.2f+offset*.8, -0.2f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+			 -0.52f, -0.2f + offset * .8, -0.2f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+			-0.28f, -0.2f + offset * .8, -0.2f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+			-0.28f,  0.2f + offset * .8, -0.2f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
+		};
+		glBindBuffer(GL_ARRAY_BUFFER, moonVBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(moonVertices), moonVertices, GL_DYNAMIC_DRAW);
 		glBindVertexArray(moonVAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+		//lighthouse
+		//bind lighthouse texture
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, lighthouseTexture);
+		//set uniform for texture
+		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
+		//draw lighthouse
+		glBindVertexArray(lighthouseVAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+		//lighthouse beam
+		//bind lighthouse beam texture
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, lighthouseBeamTexture);
+		//set uniform for texture
+		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
+		//draw lighthouse beam
+		glBindVertexArray(lighthouseBeamVAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		//====================================
@@ -238,6 +355,9 @@ void cinemagraph::drawCinemagraph() {
 	glDeleteVertexArrays(1, &moonVAO);
 	glDeleteBuffers(1, &moonVBO);
 	glDeleteBuffers(1, &moonEBO);
+	glDeleteVertexArrays(1, &lighthouseVAO);
+	glDeleteBuffers(1, &lighthouseVBO);
+	glDeleteBuffers(1, &lighthouseEBO);
 
 	glfwTerminate();
 }
@@ -250,7 +370,6 @@ void cinemagraph::processInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 }
-
 
 //load texture from path function
 GLuint cinemagraph::loadTexture(const char* path) {

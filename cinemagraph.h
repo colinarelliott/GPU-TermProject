@@ -13,6 +13,13 @@ class cinemagraph {
 	unsigned int textVAO, textVBO;
 
 	public:
+		//variables
+		// timing
+		float currentFrame = 0.0f;
+		float deltaTime = 0.0f;
+		float lastFrame = 0.0f;
+		float offset = 0.0f;
+
 		cinemagraph();
 		void drawCinemagraph();
 		void framebuffer_size_callback(GLFWwindow* window, int width, int height);
