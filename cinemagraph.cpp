@@ -66,10 +66,10 @@ void cinemagraph::drawCinemagraph() {
 
 	float sunVertices[] = {
 		// positions		   // colors           //texture coords
-		 -1.36f,  0.2f + 0.5f, -0.1f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-		 -1.36f, -0.2f + 0.5f, -0.1f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-		-1.48f, -0.2f + 0.5f, -0.1f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-		-1.48f,  0.2f + 0.5f, -0.1f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
+		 -1.36f,  0.2f + 0.5f, 0.2f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 -1.36f, -0.2f + 0.5f,0.2f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		-1.48f, -0.2f + 0.5f, 0.2f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		-1.48f,  0.2f + 0.5f, 0.2f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
 	};
 
 	float moonVertices[] = {
@@ -116,10 +116,10 @@ void cinemagraph::drawCinemagraph() {
 	glBindVertexArray(VAO); 
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(foregroundVertices), foregroundVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(foregroundVertices), foregroundVertices, GL_DYNAMIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW);
 
 	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
@@ -180,7 +180,7 @@ void cinemagraph::drawCinemagraph() {
 	glGenBuffers(1, &lighthouseEBO);
 	glBindVertexArray(lighthouseVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, lighthouseVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(lighthouseVertices), lighthouseVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(lighthouseVertices), lighthouseVertices, GL_DYNAMIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lighthouseEBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
@@ -201,7 +201,7 @@ void cinemagraph::drawCinemagraph() {
 	glGenBuffers(1, &lighthouseBeamEBO);
 	glBindVertexArray(lighthouseBeamVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, lighthouseBeamVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(lighthouseBeamVertices), lighthouseBeamVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(lighthouseBeamVertices), lighthouseBeamVertices, GL_DYNAMIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lighthouseBeamEBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
@@ -285,7 +285,7 @@ void cinemagraph::drawCinemagraph() {
 		glBindTexture(GL_TEXTURE_2D, sunTexture);
 		//set uniform for texture
 		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
-		//draw sun
+		//update sun position based on offset (sin func)
 		float sunVertices[] = {
 			// positions                             // colors           //texture coords
 			-0.28f,  0.2f + sunOffset * .8, -0.2f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
@@ -293,8 +293,10 @@ void cinemagraph::drawCinemagraph() {
 			-0.04f, -0.2f + sunOffset * .8, -0.2f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
 			-0.04f,  0.2f + sunOffset * .8, -0.2f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
 		};
+		//update sun VBO
 		glBindBuffer(GL_ARRAY_BUFFER, sunVBO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(sunVertices), sunVertices, GL_DYNAMIC_DRAW);
+		//draw sun
 		glBindVertexArray(sunVAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		
@@ -304,16 +306,18 @@ void cinemagraph::drawCinemagraph() {
 		glBindTexture(GL_TEXTURE_2D, moonTexture);
 		//set uniform for texture
 		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
-		//draw moon
+		//update moon position based on offset
 		float moonVertices[] = {
 			// positions                      // colors           //texture coords
-			-0.52f,  0.2f+offset*.8, -0.2f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-			 -0.52f, -0.2f + offset * .8, -0.2f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-			-0.28f, -0.2f + offset * .8, -0.2f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-			-0.28f,  0.2f + offset * .8, -0.2f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
+			-0.52f,  0.2f + offset * .8, -0.1f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+			 -0.52f, -0.2f + offset * .8, -0.1f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+			-0.28f, -0.2f + offset * .8, -0.1f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+			-0.28f,  0.2f + offset * .8, -0.1f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
 		};
+		//update moon VBO
 		glBindBuffer(GL_ARRAY_BUFFER, moonVBO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(moonVertices), moonVertices, GL_DYNAMIC_DRAW);
+		//draw moon
 		glBindVertexArray(moonVAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
@@ -335,6 +339,24 @@ void cinemagraph::drawCinemagraph() {
 		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
 		//draw lighthouse beam
 		glBindVertexArray(lighthouseBeamVAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+		// bind textures on corresponding texture units
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, foregroundTexture);
+		//set uniform for texture
+		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
+		float foregroundVertices[] = {
+			// positions          // colors           // texture coords
+			 1.0f,  1.0f, 0.1f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+			 1.0f, -1.0f, 0.1f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+			-1.0f, -1.0f, 0.1f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+			-1.0f,  1.0f, 0.1f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+		};
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(foregroundVertices), foregroundVertices, GL_DYNAMIC_DRAW);
+		//draw foreground
+		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		//====================================
