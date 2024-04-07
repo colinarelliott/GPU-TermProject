@@ -42,17 +42,20 @@ void cinemagraph::drawCinemagraph() {
 	Shader shader("shaders/blendShader.vs", "shaders/blendShader.fs");
 	Shader textShader("shaders/textShader.vs", "shaders/textShader.fs");
 
+	
 	//Setup Text Projection
 	glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(1280), 0.0f, static_cast<float>(720));
 	textShader.use();
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
 	FreeTypeSetup();
+	
 
-	//set input data
-	float vertices[] = {
-		// position
-		1.0f, 1.0f, 1.0f
+	//setup vertex data and buffers and configure vertex attributes
+
+	unsigned int indices[] = {
+	0, 1, 3, // first triangle
+	1, 2, 3  // second triangle
 	};
 
 	float foregroundVertices[] =  {
@@ -65,17 +68,21 @@ void cinemagraph::drawCinemagraph() {
 
 	float sunVertices[] = {
 		// positions          // colors           //texture coords
-		0.2f,  0.2f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-		 0.2f, -0.2f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-		-0.2f, -0.2f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-		-0.2f,  0.2f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
+		0.2f,  0.2f, -0.1f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 0.2f, -0.2f, -0.1f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		-0.2f, -0.2f, -0.1f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		-0.2f,  0.2f, -0.1f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
 	};
 
-	unsigned int indices[] = {
-		0, 1, 3, // first triangle
-		1, 2, 3  // second triangle
+	float moonVertices[] = {
+		// positions          // colors           //texture coords
+		0.2f,  0.2f, -0.2f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 0.2f, -0.2f, -0.2f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		-0.2f, -0.2f, -0.2f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		-0.2f,  0.2f, -0.2f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
 	};
 
+	/*
 	// configure VAO/VBO for text
 	glGenVertexArrays(1, &textVAO);
 	glGenBuffers(1, &textVBO);
@@ -84,6 +91,7 @@ void cinemagraph::drawCinemagraph() {
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+	*/
 
 	//configure VAO/VBO for cinemagraph foreground
 	unsigned int VBO, VAO, EBO;
@@ -119,6 +127,28 @@ void cinemagraph::drawCinemagraph() {
 	glBufferData(GL_ARRAY_BUFFER, sizeof(sunVertices), sunVertices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, sunEBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	// texture coord attribute
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+
+	//VAO, VBO, EBO for moon
+	unsigned int moonVBO, moonVAO, moonEBO;
+	glGenVertexArrays(1, &moonVAO);
+	glGenBuffers(1, &moonVBO);
+	glGenBuffers(1, &moonEBO);
+	glBindVertexArray(moonVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, moonVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(moonVertices), moonVertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, moonEBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
 	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -163,16 +193,16 @@ void cinemagraph::drawCinemagraph() {
 		RenderText(textShader, "Lighthouse Cinemagraph", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
 		RenderText(textShader, "Colin Elliott", 540.0f, 570.0f, 0.5f, glm::vec3(0.3, 0.7f, 0.9f));
 
+		shader.use();
+
 		// bind textures on corresponding texture units
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, foregroundTexture);
-
-		// render foreground
-		shader.use();
+		//set uniform for texture
+		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
+		//draw foreground
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-		glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
 
 		//sun
 		//bind sun texture
@@ -187,9 +217,8 @@ void cinemagraph::drawCinemagraph() {
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, moonTexture);
 		//draw moon
-		glBindVertexArray(sunVAO);
+		glBindVertexArray(moonVAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
 
 		//====================================
 
@@ -206,7 +235,9 @@ void cinemagraph::drawCinemagraph() {
 	glDeleteVertexArrays(1, &sunVAO);
 	glDeleteBuffers(1, &sunVBO);
 	glDeleteBuffers(1, &sunEBO);
-
+	glDeleteVertexArrays(1, &moonVAO);
+	glDeleteBuffers(1, &moonVBO);
+	glDeleteBuffers(1, &moonEBO);
 
 	glfwTerminate();
 }
