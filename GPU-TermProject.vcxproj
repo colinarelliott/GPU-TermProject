@@ -215,6 +215,7 @@
     <ClInclude Include="dependencies\include\assimp\XMLTools.h" />
     <ClInclude Include="dependencies\include\assimp\ZipArchiveIOSystem.h" />
     <ClInclude Include="dependencies\include\camera.h" />
+    <ClInclude Include="dependencies\include\entity.h" />
     <ClInclude Include="dependencies\include\freetype\config\ftconfig.h" />
     <ClInclude Include="dependencies\include\freetype\config\ftheader.h" />
     <ClInclude Include="dependencies\include\freetype\config\ftmodule.h" />
@@ -585,6 +586,10 @@
     <None Include="dependencies\include\glm\gtx\vector_angle.inl" />
     <None Include="dependencies\include\glm\gtx\vector_query.inl" />
     <None Include="dependencies\include\glm\gtx\wrap.inl" />
+    <None Include="shaders\blendShader.fs" />
+    <None Include="shaders\blendShader.vs" />
+    <None Include="shaders\shader.fs" />
+    <None Include="shaders\shader.vs" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="dependencies\library\assimp.lib" />
@@ -597,6 +602,9 @@
     <Image Include="resources\img\lighthouseBeam.png" />
     <Image Include="resources\img\moon.png" />
     <Image Include="resources\img\sun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\fonts\Antonio-Regular.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
