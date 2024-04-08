@@ -66,10 +66,10 @@ void cinemagraph::drawCinemagraph() {
 
 	float sunVertices[] = {
 		// positions		   // colors           //texture coords
-		 -1.36f,  0.2f + 0.5f, 0.2f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-		 -1.36f, -0.2f + 0.5f,0.2f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-		-1.48f, -0.2f + 0.5f, 0.2f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-		-1.48f,  0.2f + 0.5f, 0.2f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
+		 -1.36f,  0.2f + 0.5f, -0.2f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 -1.36f, -0.2f + 0.5f, -0.2f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		-1.48f, -0.2f + 0.5f, -0.2f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		-1.48f,  0.2f + 0.5f, -0.2f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
 	};
 
 	float moonVertices[] = {
@@ -270,28 +270,19 @@ void cinemagraph::drawCinemagraph() {
 
 		shader.use();
 
-		// bind textures on corresponding texture units
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, foregroundTexture);
-		//set uniform for texture
-		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
-		//draw foreground
-		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
 		//sun
 		//bind sun texture
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, sunTexture);
 		//set uniform for texture
-		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
+		glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
 		//update sun position based on offset (sin func)
 		float sunVertices[] = {
 			// positions                             // colors           //texture coords
-			-0.28f,  0.2f + sunOffset * .8, -0.2f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-			 -0.28f, -0.2f + sunOffset * .8, -0.2f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-			-0.04f, -0.2f + sunOffset * .8, -0.2f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-			-0.04f,  0.2f + sunOffset * .8, -0.2f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
+			-0.28f,  0.2f + sunOffset * .8, 0.2f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+			 -0.28f, -0.2f + sunOffset * .8, 0.2f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+			-0.04f, -0.2f + sunOffset * .8, 0.2f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+			-0.04f,  0.2f + sunOffset * .8, 0.2f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
 		};
 		//update sun VBO
 		glBindBuffer(GL_ARRAY_BUFFER, sunVBO);
@@ -305,14 +296,14 @@ void cinemagraph::drawCinemagraph() {
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, moonTexture);
 		//set uniform for texture
-		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
+		glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
 		//update moon position based on offset
 		float moonVertices[] = {
 			// positions                      // colors           //texture coords
-			-0.52f,  0.2f + offset * .8, -0.1f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-			 -0.52f, -0.2f + offset * .8, -0.1f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-			-0.28f, -0.2f + offset * .8, -0.1f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-			-0.28f,  0.2f + offset * .8, -0.1f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
+			-0.52f,  0.2f + offset * .8, 0.2f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+			 -0.52f, -0.2f + offset * .8, 0.2f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+			-0.28f, -0.2f + offset * .8, 0.2f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+			-0.28f,  0.2f + offset * .8, 0.2f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left s
 		};
 		//update moon VBO
 		glBindBuffer(GL_ARRAY_BUFFER, moonVBO);
@@ -321,12 +312,22 @@ void cinemagraph::drawCinemagraph() {
 		glBindVertexArray(moonVAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
+		//draw foreground
+		// bind textures on corresponding texture units
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, foregroundTexture);
+		//set uniform for texture
+		glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
+		//draw foreground
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
 		//lighthouse
 		//bind lighthouse texture
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, lighthouseTexture);
 		//set uniform for texture
-		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
+		glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
 		//draw lighthouse
 		glBindVertexArray(lighthouseVAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -336,27 +337,9 @@ void cinemagraph::drawCinemagraph() {
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, lighthouseBeamTexture);
 		//set uniform for texture
-		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
+		glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
 		//draw lighthouse beam
 		glBindVertexArray(lighthouseBeamVAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-		// bind textures on corresponding texture units
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, foregroundTexture);
-		//set uniform for texture
-		glUniform1i(glGetUniformLocation(shader.ID, "myTexture"), 0);
-		float foregroundVertices[] = {
-			// positions          // colors           // texture coords
-			 1.0f,  1.0f, 0.1f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-			 1.0f, -1.0f, 0.1f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-			-1.0f, -1.0f, 0.1f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-			-1.0f,  1.0f, 0.1f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
-		};
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(foregroundVertices), foregroundVertices, GL_DYNAMIC_DRAW);
-		//draw foreground
-		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		//====================================
