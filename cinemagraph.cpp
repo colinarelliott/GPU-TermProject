@@ -83,6 +83,14 @@ void cinemagraph::drawCinemagraph() {
 		 -1.2f,  0.55f, -0.4f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
 	};
 
+	float titleVertices[] = {
+		// positions          // colors           // texture coords
+		 1.0f,  -0.6f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 1.0f, -1.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		-1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		-1.0f,  -0.6f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+	};
+
 	//configure VAO/VBO for cinemagraph foreground
 	unsigned int VBO, VAO, EBO;
 	glGenVertexArrays(1, &VAO);
@@ -143,6 +151,18 @@ void cinemagraph::drawCinemagraph() {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	SetupVertexPointers();
 
+	//VAO, VBO, EBO for title
+	unsigned int titleVAO, titleVBO, titleEBO;
+	glGenVertexArrays(1, &titleVAO);
+	glGenBuffers(1, &titleVBO);
+	glGenBuffers(1, &titleEBO);
+	glBindVertexArray(titleVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, titleVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(titleVertices), titleVertices, GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, titleEBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW);
+	SetupVertexPointers();
+
 	//load texture into shader
 	shader.use();
 	glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
@@ -165,6 +185,9 @@ void cinemagraph::drawCinemagraph() {
 	//load lighthouse beam image
 	//Homemade in Photoshop
 	GLuint lighthouseBeamTexture = loadTexture("resources/img/lighthouseBeam.png");
+	//load title image
+	//Homemade in Photoshop
+	GLuint cinemagraphTitle = loadTexture("resources/img/cinemagraphLabel.png");
 	
 	//clear
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -242,6 +265,15 @@ void cinemagraph::drawCinemagraph() {
 		glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
 		//draw foreground
 		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+		//title (in place of rendering text)
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, cinemagraphTitle);
+		//set uniform for texture
+		glUniform1i(glGetUniformLocation(shader.ID, "texture1"), 0);
+		//draw title
+		glBindVertexArray(titleVAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		//lighthouse

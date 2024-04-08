@@ -40,11 +40,47 @@ void lighthouse::drawLighthouse() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	//initialize data for title display
+	float titleVertices[] = {
+		// positions          // colors           // texture coords
+		 1.0f,  -0.6f, 0.1f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 1.0f, -1.0f, 0.1f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		-1.0f, -1.0f, 0.1f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		-1.0f,  -0.6f, 0.1f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+	};
+	unsigned int titleIndices[] = {
+		0, 1, 3, // first triangle
+		1, 2, 3  // second triangle
+	};
+
+	//initialize vertex array, vertex buffer, element buffer
+	unsigned int titleVAO, titleVBO, titleEBO;
+	glGenVertexArrays(1, &titleVAO);
+	glGenBuffers(1, &titleVBO);
+	glGenBuffers(1, &titleEBO);
+	glBindVertexArray(titleVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, titleVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(titleVertices), titleVertices, GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, titleEBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(titleIndices), titleIndices, GL_DYNAMIC_DRAW);
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	// texture coord attribute
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+
 	//flip images vertically
 	stbi_set_flip_vertically_on_load(true);
+	GLuint texture;
+	texture = loadTexture("resources/img/lighthouseLabel.png");
 
 	//build and compile shaders (default vertex and fragment shaders)
 	Shader shader("shaders/shader.vs", "shaders/shader.fs");
+	Shader blendShader("shaders/blendShader.vs", "shaders/blendShader.fs");
 
 	//load lighthouse models
 	Model lighthouseLow("resources/models/lighthouse/lighthouse_cyl.obj");
@@ -53,6 +89,10 @@ void lighthouse::drawLighthouse() {
 
 	//bind shader
 	shader.use();
+
+	//blend shader
+	blendShader.use();
+	glUniform1i(glGetUniformLocation(blendShader.ID, "texture1"), 0);
 
 	//clear
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -101,6 +141,15 @@ void lighthouse::drawLighthouse() {
 		else if (camera.Zoom > 30.0f && camera.Zoom < 50.0f) {
 			lighthouseLow.Draw(shader);
 		}
+
+		//draw lighthouse label (in place of text rendering)
+		glBindVertexArray(titleVAO);
+		glActiveTexture(GL_TEXTURE0);
+		glUniform1i(glGetUniformLocation(blendShader.ID, "texture1"), 0);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		blendShader.use();
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
 
 		//====================================
 

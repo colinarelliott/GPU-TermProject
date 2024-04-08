@@ -1422,6 +1422,12 @@
     <Image Include="resources\img\lighthouseBeam.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="resources\img\cinemagraphLabel.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\img\lighthouseLabel.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\fonts\Antonio-Regular.ttf" />
